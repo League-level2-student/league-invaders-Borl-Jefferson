@@ -7,13 +7,16 @@ public class LeagueInvaders{
 	 
 	public static final int HEIGHT = 800;
 	public static final int WIDTH = 500;
-		
+	
 public static void main(String[] args) {
-JFrame jeff = new JFrame();
+	JFrame jeff = new JFrame();
+JPanel jepp = new JPanel();
 
 	LeagueInvaders li = new LeagueInvaders();
 	
+	RESUME HERE
 	
+		jeff.addKeyListener(gp);
 
 	setup(jeff);
 	
@@ -24,5 +27,6 @@ public static void setup(JFrame fm) {
 	fm.setVisible(true);
 	fm.setSize(WIDTH, HEIGHT);
 	fm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 }
 }
