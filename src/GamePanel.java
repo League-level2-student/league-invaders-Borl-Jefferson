@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		framedraw.start();
    }
   
-  public void  updateMenuState(Graphics g) {  
+  public void  updateMenuState() {  
 	  
 	  
   }
@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	  g.drawString("Press [ENTER] to start", 125, 400);
 	  g.drawString("Press [SPACE] for a tuturial", 100, 500);
     }
+   
     
     public void drawGameState(Graphics g) {  
     	g.setColor(Color.BLACK);
@@ -77,7 +78,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-
+		if(currentState == MENU){
+		    updateMenuState();
+		}else if(currentState == GAME){
+		    updateGameState();
+		}else if(currentState == END){
+		    updateEndState();
+		}
+	
 		repaint();
 		
 	}
@@ -88,11 +96,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
 		        currentState = MENU;
+		       
 		    } else {
 		        currentState++;
 		    }
 		} 
-		
+		System.out.println(currentState);
 		
 		if (e.getKeyCode()==KeyEvent.VK_UP) {
 		    System.out.println("UP");
