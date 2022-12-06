@@ -13,6 +13,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU = 0;
     final int GAME = 1;
     final int END = 2;
+    Rocketship ship = new Rocketship(250, 700, 50, 50);
     int currentState = MENU;
    Font tf = new Font("Arial", Font.PLAIN, 48);
    Font stf = new Font("Arial", Font.PLAIN, 24);
@@ -20,6 +21,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
    GamePanel(){
   	framedraw = new Timer(1000/60,this);
 		framedraw.start();
+		
    }
   
   public void  updateMenuState() {  
@@ -50,6 +52,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void drawGameState(Graphics g) {  
     	g.setColor(Color.BLACK);
     	g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+    	ship.draw(g);
+    	ship.update();
     }
     
     public void drawEndState(Graphics g)  { 
@@ -105,22 +109,37 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		if (e.getKeyCode()==KeyEvent.VK_UP) {
 		    System.out.println("UP");
+		    ship.up();
 		}
 		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
 		    System.out.println("DOWN");
+		    ship.down();
 		}
 		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
 		    System.out.println("LEFT");
+		    ship.left();
 		}
 		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
 		    System.out.println("RIGHT");
+		    ship.right();
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+			ship.respeedxr();
+		}
+		if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+			ship.respeedyd();
+		}
+		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+			ship.respeedxl();
+		}
+		if(e.getKeyCode()==KeyEvent.VK_UP) {
+			ship.respeedyu();
+		}
 	}
 
 	@Override
