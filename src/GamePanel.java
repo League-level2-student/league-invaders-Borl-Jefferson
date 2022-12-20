@@ -13,10 +13,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU = 0;
     final int GAME = 1;
     final int END = 2;
-    int ru = 0;
-    int rd = 0;
-    int rr = 0;
-    int rl = 0;
     int ys = 0;
     int xs = 0;
     Rocketship ship = new Rocketship(250, 700, 50, 50);
@@ -35,7 +31,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	  
   }
     public void updateGameState() {
- 
+ship.update();
+
     }
     public void updateEndState()  {
     	
@@ -59,7 +56,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     	g.setColor(Color.BLACK);
     	g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
     	ship.draw(g);
-    	ship.update();
+    	
     }
     
     public void drawEndState(Graphics g)  { 
@@ -115,7 +112,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		if (e.getKeyCode()==KeyEvent.VK_UP) {
 		    System.out.println("UP");
-ru=rd==0 ? -10:-20;
+ship.ru=ship.rd==0 ? -10:-20;
 		    
 		    
 		    
@@ -123,7 +120,7 @@ ru=rd==0 ? -10:-20;
 		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
 		    System.out.println("DOWN");
 
-		    rd=ru==0 ? 10:20;  
+		    ship. rd=ship.ru==0 ? 10:20;  
 		    
 		    
 		
@@ -132,13 +129,13 @@ ru=rd==0 ? -10:-20;
 		    System.out.println("LEFT");
 
 		    
-		    rl=rr==0 ? -10:-20; 
+		    ship. rl=ship.rr==0 ? -10:-20; 
 		  
 		}
 		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
 		    System.out.println("RIGHT");
 
-		    rr=rl==0 ? 10:20;
+		    ship.rr=ship.rl==0 ? 10:20;
 		    
 		    
 		
@@ -151,19 +148,31 @@ ru=rd==0 ? -10:-20;
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
 //ship.respeedxr();
 			ship.rr=0;
+			if(ship.rl<-10) {
+				ship.rl=-10;
+			}
 		}
 		if(e.getKeyCode()==KeyEvent.VK_DOWN) {
 	//		ship.respeedyd();
 			ship.rd=0;
+			if(ship.ru<-10) {
+				ship.ru=-10;
+			}
 		}
 		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
 	//		ship.respeedxl();
 			ship.rl=0;
+			if(ship.rr>10) {
+				ship.rr=10;
+			}
 					
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP) {
 	//		ship.respeedyu();
 		ship.ru=0;
+		if(ship.rd>10) {
+			ship.rd=10;
+		}
 		}
 	}
 

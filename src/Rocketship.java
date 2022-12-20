@@ -23,10 +23,26 @@ public class Rocketship extends GameObject {
 	        g.fillRect(x, y, width, height);
 	}
 	public void update() {
-	   	y+=ys;
-	   	x+=xs;
-		ys=rr+rl;
-    	xs=rd+ru;
+	   
+		   
+		ys=ru+rd;
+    	xs=rr+rl;
+    	System.out.println("xs " + xs + " ys " + ys+" y " + y + " x " + x );
+    	if(y+ys+height+height/2<LeagueInvaders.HEIGHT && y+ys>=0) {
+
+y+=ys;
+    	}
+    	else if(y+ys>=0) {
+    		y=LeagueInvaders.HEIGHT-height-height/2;
+    	}
+    	if(x+xs+width<LeagueInvaders.WIDTH && x+xs>=0 ) {
+    		x+=xs;
+    	}
+    	else if(x+xs>=0) {
+    	x=LeagueInvaders.WIDTH-width;
+    	}
+    	//
+    	
 	}
         
 }
