@@ -48,6 +48,7 @@ ship.update();
 	  g.drawString("League Invaders", 50, 100);
 	  g.setFont(stf);
 	  g.drawString("Press [ENTER] to start", 125, 400);
+	  g.drawString("Don't press everything at the same time", 50, 450);
 	  g.drawString("Press [SPACE] for a tuturial", 100, 500);
     }
    
@@ -110,14 +111,14 @@ ship.update();
 		} 
 		System.out.println(currentState);
 		
-		if (e.getKeyCode()==KeyEvent.VK_UP) {
+		if (e.getKeyCode()==KeyEvent.VK_UP || e.getKeyCode()==KeyEvent.VK_W) {
 		    System.out.println("UP");
 ship.ru=ship.rd==0 ? -10:-20;
 		    
 		    
 		    
 		}
-		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+		if (e.getKeyCode()==KeyEvent.VK_DOWN || e.getKeyCode()==KeyEvent.VK_S) {
 		    System.out.println("DOWN");
 
 		    ship. rd=ship.ru==0 ? 10:20;  
@@ -125,14 +126,14 @@ ship.ru=ship.rd==0 ? -10:-20;
 		    
 		
 		}
-		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+		if (e.getKeyCode()==KeyEvent.VK_LEFT || e.getKeyCode()==KeyEvent.VK_A) {
 		    System.out.println("LEFT");
 
 		    
 		    ship. rl=ship.rr==0 ? -10:-20; 
 		  
 		}
-		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		if (e.getKeyCode()==KeyEvent.VK_RIGHT || e.getKeyCode()==KeyEvent.VK_D) {
 		    System.out.println("RIGHT");
 
 		    ship.rr=ship.rl==0 ? 10:20;
@@ -145,21 +146,21 @@ ship.ru=ship.rd==0 ? -10:-20;
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT || e.getKeyCode()==KeyEvent.VK_D) {
 //ship.respeedxr();
 			ship.rr=0;
 			if(ship.rl<-10) {
 				ship.rl=-10;
 			}
 		}
-		if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+		if(e.getKeyCode()==KeyEvent.VK_DOWN || e.getKeyCode()==KeyEvent.VK_S) {
 	//		ship.respeedyd();
 			ship.rd=0;
 			if(ship.ru<-10) {
 				ship.ru=-10;
 			}
 		}
-		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+		if(e.getKeyCode()==KeyEvent.VK_LEFT || e.getKeyCode()==KeyEvent.VK_A) {
 	//		ship.respeedxl();
 			ship.rl=0;
 			if(ship.rr>10) {
@@ -167,7 +168,7 @@ ship.ru=ship.rd==0 ? -10:-20;
 			}
 					
 		}
-		if(e.getKeyCode()==KeyEvent.VK_UP) {
+		if(e.getKeyCode()==KeyEvent.VK_U || e.getKeyCode()==KeyEvent.VK_W) {
 	//		ship.respeedyu();
 		ship.ru=0;
 		if(ship.rd>10) {
