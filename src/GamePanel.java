@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -14,8 +16,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     final int GAME = 1;
     final int END = 2;
     int ys = 0;
+    Timer alienspawn;
     int xs = 0;
-
+    public static BufferedImage image;
+    public static boolean needImage = true;
+    public static boolean gotImage = false;	
     Rocketship ship = new Rocketship(250, 700, 50, 50);
     ObjectManager obj = new ObjectManager(ship);
     int currentState = MENU;
@@ -24,8 +29,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
    Timer framedraw;
    GamePanel(){
   	framedraw = new Timer(1000/60,this);
+  	
 		framedraw.start();
-		
+		if (needImage) {
+		    loadImage ("space.png");
+		}
+   }
+   public void startgame () {
+	   alienspawn = new Timer(1000/5, obj);
+	   alienspawn.start();
    }
   
   public void  updateMenuState() {  
@@ -56,8 +68,14 @@ obj.update();
    
     
     public void drawGameState(Graphics g) {  
-    	g.setColor(Color.BLACK);
+   //	g.setColor(Color.BLACK);
+    	if (gotImage) {
+    	g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
+    } else {
+    	g.setColor(Color.BLUE);
     	g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+    }
+    	//g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
     	obj.draw(g);
     	
     }
@@ -81,6 +99,7 @@ obj.update();
 		    drawMenuState(g);
 		}else if(currentState == GAME){
 		    drawGameState(g);
+		   
 		}else if(currentState == END){
 		    drawEndState(g);
 		   
@@ -92,7 +111,9 @@ obj.update();
 		if(currentState == MENU){
 		    updateMenuState();
 		}else if(currentState == GAME){
+			
 		   updateGameState();
+		   
 		}else if(currentState == END){
 		    updateEndState();
 		}
@@ -104,12 +125,21 @@ obj.update();
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+		if(currentState==GAME) {
+			obj.addprojectile(ship.getProjectile());
+		}
+		}
+		
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
 		        currentState = MENU;
 		       
 		    } else {
 		        currentState++;
+		        if(currentState==GAME) {
+		        	startgame();
+		        }
 		    }
 		} 
 		System.out.println(currentState);
@@ -185,5 +215,15 @@ ship.ru=ship.rd==0 ? -10:-20;
 		// TODO Auto-generated method stub
 		
 	}
-	
+	void loadImage(String imageFile) {
+	    if (needImage) {
+	        try {
+	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage = false;
+	    }
+	}
 }

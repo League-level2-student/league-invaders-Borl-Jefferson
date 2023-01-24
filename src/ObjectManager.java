@@ -1,15 +1,21 @@
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class ObjectManager {
+import javax.swing.Timer;
+
+public class ObjectManager implements ActionListener {
 Rocketship ship;
+Timer alientimer;
 ArrayList <Projectile>pro=new ArrayList <Projectile>();
 ArrayList <Alien>alien=new ArrayList <Alien>();
 Random r = new Random();
 ObjectManager(Rocketship rocketship) {
 	this.ship=rocketship;
+//	alientimer = new Timer(10000/3,this);
 }
 void addprojectile(Projectile single) {
 	pro.add(single);
@@ -66,5 +72,10 @@ void removep() {
 		if(!eachPro.isactive)
 			it.remove();
 	}
+}
+@Override
+public void actionPerformed(ActionEvent e) {
+	// TODO Auto-generated method stub
+	addalien();
 }
 }
