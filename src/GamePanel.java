@@ -16,6 +16,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     final int GAME = 1;
     final int END = 2;
     int ys = 0;
+    int ac =1;
     Timer alienspawn;
     int xs = 0;
     public static BufferedImage image;
@@ -87,8 +88,10 @@ obj.update();
   	  g.setColor(Color.WHITE);
   	  g.drawString("Nice Try", 50, 100);
   	  g.setFont(stf);
-  	  g.drawString("You killed (enimies killed) enimies", 125, 400);
+  	 // g.drawString("You killed " + obj.score + " enimies", 125, 400);
   	  g.drawString("Press [ENTER] to restart", 100, 500);
+  	//  ac=100*(obj.score-obj.fired);
+  	  //g.drawString(obj.fired + " shots fired with a " + ac + "% hitrate", 75, 600);
     }
 
 
@@ -127,6 +130,8 @@ obj.update();
 		// TODO Auto-generated method stub
 		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
 		if(currentState==GAME) {
+			
+		//	obj.addprojectile(ship.x, ship.y, 10, 10);
 			obj.addprojectile(ship.getProjectile());
 		}
 		}
