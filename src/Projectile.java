@@ -8,17 +8,19 @@ public class Projectile extends GameObject{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
-boolean isactive;
+boolean isactive = true;
 	public Projectile(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		if (needImage) {
-		    loadImage ("projectile.png");
+		    loadImage ("bullet.png");
 		}
 		this.yspeedu=10;
 		// TODO Auto-generated constructor stub
 	}
 	public void update() {
-		y-=yspeedu;
+		y-=25;
+		 colbox.setBounds(x, y, width, height);
+		super.update();
 		}
 
 	void draw(Graphics g) {

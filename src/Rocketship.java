@@ -14,6 +14,7 @@ public class Rocketship extends GameObject {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
+	boolean isactive=true;
 	public Rocketship(int x, int y, int width, int height) {
 	
 			
@@ -42,7 +43,7 @@ public class Rocketship extends GameObject {
 	}
 	public void update() {
 	   
-		   
+		 colbox.setBounds(x, y, width, height);
 		ys=ru+rd;
     	xs=rr+rl;
    // 	System.out.println("xs " + xs + " ys " + ys+" y " + y + " x " + x );

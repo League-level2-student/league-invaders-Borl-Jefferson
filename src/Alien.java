@@ -19,7 +19,8 @@ public class Alien extends GameObject{
 	}
 public void update() {
 	y+=yspeedu;
-
+	 colbox.setBounds(x, y, width, height);
+super.update();
 	}
 
 void draw(Graphics g) {

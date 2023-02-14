@@ -1,3 +1,4 @@
+import java.awt.Rectangle;
 
 public class GameObject {
 int x;
@@ -10,8 +11,10 @@ int width;
 int height;
 int speed = 10;
 boolean isactive = true;
+Rectangle colbox;
 
 public GameObject(int x, int y, int width, int height) {
+colbox = new Rectangle(x, y, width, height);
 	this.x=x;
 	this.y=y;
 			this.width=width;
@@ -29,6 +32,7 @@ x+=xspeedl;
 	x+=xspeedr;
 	
 	y+=yspeedu;
+	 colbox.setBounds(x, y, width, height);
 }
 
 }

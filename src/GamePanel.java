@@ -47,6 +47,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void updateGameState() {
 ship.update();
 obj.update();
+if(ship.isactive==false ){
+	currentState =2;
+}
     }
     public void updateEndState()  {
     	
@@ -133,6 +136,25 @@ obj.update();
 		
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
+		        Rocketship ship = new Rocketship(250, 700, 50, 50);
+		        ObjectManager obj = new ObjectManager(ship);
+		       
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		 	   alienspawn = new Timer(1000/5, obj);
+		 	   
+		 	   ship.isactive=true;
 		        currentState = MENU;
 		       
 		    } else {
@@ -178,6 +200,7 @@ ship.ru=ship.rd==0 ? -10:-20;
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT || e.getKeyCode()==KeyEvent.VK_D) {
 //ship.respeedxr();
