@@ -10,11 +10,13 @@ int yspeedd;
 int width;
 int height;
 int speed = 10;
+Rectangle col;
 boolean isactive = true;
 Rectangle colbox;
 
 public GameObject(int x, int y, int width, int height) {
 colbox = new Rectangle(x, y, width, height);
+
 	this.x=x;
 	this.y=y;
 			this.width=width;
@@ -26,13 +28,14 @@ yspeedd = 0;
 }
 public void update(){
 
-x+=xspeedl;
+//x+=xspeedl;
 	
-	y+=yspeedd;
-	x+=xspeedr;
-	
+	//y+=yspeedd;
+	//x+=xspeedr;
+
 	y+=yspeedu;
 	 colbox.setBounds(x, y, width, height);
+
 }
 
 }

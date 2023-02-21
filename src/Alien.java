@@ -18,6 +18,7 @@ public class Alien extends GameObject{
 		// TODO Auto-generated constructor stub
 	}
 public void update() {
+super.update();
 	y+=yspeedu;
 	 colbox.setBounds(x, y, width, height);
 super.update();
@@ -28,6 +29,8 @@ void draw(Graphics g) {
   //  g.fillRect(x, y, width, height);
     if (gotImage) {
     	g.drawImage(image, x, y, width, height, null);
+    	g.setColor(Color.WHITE);
+    	g.drawRect(col.x, col.y, width, height);
     } else {
     	g.setColor(Color.BLUE);
     	g.fillRect(x, y, width, height);

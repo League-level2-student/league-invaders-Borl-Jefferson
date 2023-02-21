@@ -36,14 +36,18 @@ public class Rocketship extends GameObject {
 	     //   g.fillRect(x, y, width, height);
 	        if (gotImage) {
 	        	g.drawImage(image, x, y, width, height, null);
+	        	g.setColor(Color.WHITE);
+	        	g.drawRect(col.x, col.y, width, height);
 	        } else {
 	        	g.setColor(Color.BLUE);
 	        	g.fillRect(x, y, width, height);
 	        }
 	}
 	public void update() {
-	   
+
 		 colbox.setBounds(x, y, width, height);
+
+		   super.update();
 		ys=ru+rd;
     	xs=rr+rl;
    // 	System.out.println("xs " + xs + " ys " + ys+" y " + y + " x " + x );

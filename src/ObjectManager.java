@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import java.awt.Rectangle;
 import javax.swing.Timer;
 
 public class ObjectManager implements ActionListener {
 	Rocketship ship;
+//int score = 0;
+	int fired = 0;
 	Timer alientimer;
 	ArrayList<Projectile> pro = new ArrayList<Projectile>();
 	ArrayList<Alien> alien = new ArrayList<Alien>();
@@ -44,13 +45,32 @@ int base;
 		alien.add(new Alien(r.nextInt(LeagueInvaders.WIDTH), 0, 50, 50, r.nextInt(5) + 3));
 		}
 		alientotal++;
+	
+		fired += 1;
+	}
+
+
+	void checkcol() {
+		for (int i = 0; i < alien.size(); i++) {
+			if (ship.col.intersects(alien.get(i).col)) {
+				
+				ship.isactive = false;
+				break;
+			}
+		
+		for(int j=0;j<pro.size();j++) {
+			if((pro.get(j).col.intersects(alien.get(j).col))) {
+				score++;
+						alien.get(j).isactive=false;
+						pro.get(j).isactive=false;
+		}
+		}
+
+	}
 	}
 
 	void draw(Graphics g) {
 		ship.draw(g);
-		for (int i = 0; alien.size() > i; i++) {
-			alien.get(i).draw(g);
-		}
 
 		for (int j = 0; pro.size() > j; j++) {
 			pro.get(j).draw(g);
@@ -58,8 +78,7 @@ int base;
 	}
 
 	void update() {
-		checkcol();
-		System.out.println(pro.size());
+
 		for (int i = 0; alien.size() > i; i++) {
 			alien.get(i).update();
 
@@ -86,6 +105,7 @@ int base;
 			if (!eachAlien.isactive)
 				it.remove();
 			score++;
+
 		}
 	}
 
@@ -102,26 +122,6 @@ int base;
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		addalien();
-	}
-
-	public void checkcol() {
-
-		for (int i = 0; alien.size() > i; i++) {
-
-		if (ship.colbox.intersects(alien.get(i).colbox)){
-			alien.get(i).isactive=false;
-					ship.isactive=false;
-			}
-
-			for (int j = 0; pro.size() > j; j++) {
-			
-				if(pro.get(j).colbox.intersects(alien.get(i).colbox)) {
-					pro.get(j).isactive=false;
-					alien.get(i).isactive=false;
-			}
-			}
-		}
-
 	}
 
 }
