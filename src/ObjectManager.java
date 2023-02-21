@@ -17,11 +17,18 @@ public class ObjectManager implements ActionListener {
 	int score =0;
 	int shots =0;
 int alientotal =0;
+boolean userinput = false;
+
+String empty = "";
+int change;
+int base;
 
 	ObjectManager(Rocketship rocketship) {
 		this.ship = rocketship;
+		
 //	alientimer = new Timer(10000/3,this);
-		alien.clear();
+		alien=new ArrayList<Alien>();
+		pro=new ArrayList<Projectile>();
 	}
 
 	void addprojectile(Projectile single) {
@@ -30,8 +37,13 @@ int alientotal =0;
 	}
 
 	void addalien() {
-		alien.add(new Alien(r.nextInt(LeagueInvaders.WIDTH), 0, 50, 50, r.nextInt(7) + 7));
-alientotal++;
+		if(userinput=true) {
+		alien.add(new Alien(r.nextInt(LeagueInvaders.WIDTH), 0, 50, 50, r.nextInt(change) + base));
+		}
+		else {
+		alien.add(new Alien(r.nextInt(LeagueInvaders.WIDTH), 0, 50, 50, r.nextInt(5) + 3));
+		}
+		alientotal++;
 	}
 
 	void draw(Graphics g) {

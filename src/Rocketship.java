@@ -14,7 +14,7 @@ public class Rocketship extends GameObject {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
-	boolean isactive=true;
+	
 	public Rocketship(int x, int y, int width, int height) {
 	
 			

@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -18,6 +19,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     int ys = 0;
     Timer alienspawn;
     int xs = 0;
+    int imax;
+    int imin;
+   // String empty = "";
     public static BufferedImage image;
     public static boolean needImage = true;
     public static boolean gotImage = false;	
@@ -29,15 +33,38 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
    Timer framedraw;
    GamePanel(){
   	framedraw = new Timer(1000/60,this);
-  	
+//	  String min = JOptionPane.showInputDialog("Minimum");
+//		  String max = JOptionPane.showInputDialog("Max");
+//		  int imax=Integer.parseInt(max);
+//		  int imin=Integer.parseInt(min);
+//		  obj.base=imin;
+//		  obj.change=imax;
 		framedraw.start();
 		if (needImage) {
 		    loadImage ("space.png");
+		
+			  updateMenuState();
 		}
    }
    public void startgame () {
+	   String min = "5";
+	   String max = "5";
+		 min = JOptionPane.showInputDialog("Minimum");
+		   max = JOptionPane.showInputDialog("Max");
+		   
+		   System.out.println(min + " " + max);
+	if(max.isEmpty()==false && min.isEmpty()==false) {
+	obj.	userinput=true;
+		   imax=Integer.parseInt(max);
+		   imin=Integer.parseInt(min);
+	
+		  obj.base=imin;
+		  obj.change=imax+1; 
+	}
+		  updateMenuState();
 	   alienspawn = new Timer(1000/5, obj);
 	   alienspawn.start();
+	  
    }
   
   public void  updateMenuState() {  
@@ -49,6 +76,9 @@ ship.update();
 obj.update();
 if(ship.isactive==false ){
 	currentState =2;
+    ship = new Rocketship(250, 700, 50, 50);
+   obj = new ObjectManager(ship);
+      alienspawn = new Timer(1000/5, obj);
 }
     }
     public void updateEndState()  {
@@ -67,13 +97,14 @@ if(ship.isactive==false ){
 	  g.drawString("Press [ENTER] to start", 125, 400);
 	  g.drawString("Don't press everything at the same time", 50, 450);
 	  g.drawString("Press [SPACE] for a tuturial", 100, 500);
+
     }
    
     
     public void drawGameState(Graphics g) {  
    //	g.setColor(Color.BLACK);
     	if (gotImage) {
-    	g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
+g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
     } else {
     	g.setColor(Color.BLUE);
     	g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
@@ -90,7 +121,7 @@ if(ship.isactive==false ){
   	  g.setColor(Color.WHITE);
   	  g.drawString("Nice Try", 50, 100);
   	  g.setFont(stf);
-  	  g.drawString("You killed (enimies killed) enimies", 125, 400);
+  	  g.drawString("You killed " + obj.score +  " enimies", 125, 400);
   	  g.drawString("Press [ENTER] to restart", 100, 500);
     }
 
@@ -112,13 +143,16 @@ if(ship.isactive==false ){
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(currentState == MENU){
-		    updateMenuState();
+		updateGameState();
+		
+			
 		}else if(currentState == GAME){
 			
 		   updateGameState();
 		   
 		}else if(currentState == END){
 		    updateEndState();
+		    
 		}
 	
 		repaint();
@@ -128,6 +162,10 @@ if(ship.isactive==false ){
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
+	
+		
+		
 		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
 		if(currentState==GAME) {
 			obj.addprojectile(ship.getProjectile());
@@ -136,9 +174,7 @@ if(ship.isactive==false ){
 		
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
-		        Rocketship ship = new Rocketship(250, 700, 50, 50);
-		        ObjectManager obj = new ObjectManager(ship);
-		       
+	
 		        
 		        
 		        
@@ -152,7 +188,7 @@ if(ship.isactive==false ){
 		        
 		        
 		        
-		 	   alienspawn = new Timer(1000/5, obj);
+		 	
 		 	   
 		 	   ship.isactive=true;
 		        currentState = MENU;
