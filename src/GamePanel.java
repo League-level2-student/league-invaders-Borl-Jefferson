@@ -45,7 +45,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 			  updateMenuState();
 		}
-   }
+   } 
    public void startgame () {
 	   String min = "5";
 	   String max = "5";
