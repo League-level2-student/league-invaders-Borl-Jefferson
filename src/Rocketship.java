@@ -32,20 +32,21 @@ public class Rocketship extends GameObject {
 } 
 	
 	void draw(Graphics g) {
+		if(g!=null) {
 		 //g.setColor(Color.BLUE);
 	     //   g.fillRect(x, y, width, height);
 	        if (gotImage) {
 	        	g.drawImage(image, x, y, width, height, null);
-	        	g.setColor(Color.WHITE);
-	        	g.drawRect(col.x, col.y, width, height);
+	      
 	        } else {
 	        	g.setColor(Color.BLUE);
 	        	g.fillRect(x, y, width, height);
 	        }
 	}
+	}
 	public void update() {
 
-		 colbox.setBounds(x, y, width, height);
+		 col.setBounds(x, y, width, height);
 
 		   super.update();
 		ys=ru+rd;
